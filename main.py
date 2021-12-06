@@ -42,7 +42,7 @@ async def main():
 
                     if sender == 'vr-controller':
                         try:
-                            data_dict = json.loads(data_dict)
+                            data_dict = json.loads(data)
                             update_robot(data_dict)
                         except:
                             print("error parsing data from message", data)
