@@ -96,5 +96,4 @@ async def main():
     except:
         print('error connecting to socket server')
 
-
 asyncio.get_event_loop().run_until_complete(main())
