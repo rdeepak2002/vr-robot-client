@@ -32,9 +32,9 @@ async def main():
         async with websockets.connect(url) as websocket:
             while True:
                 # wait for message from vr controller
-                server_message = await websocket.recv()
-
                 try:
+                    server_message = await websocket.recv()
+
                     server_message_obj = json.loads(server_message)
 
                     sender = server_message_obj['sender']
