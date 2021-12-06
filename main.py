@@ -42,7 +42,7 @@ async def main():
                 # send image to socket server
                 data = {
                     "sender": "camera",
-                    "base64": base64_img_string
+                    "data": base64_img_string
                 }
 
                 data_str = str(json.dumps(data))
