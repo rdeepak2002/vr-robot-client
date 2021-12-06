@@ -31,11 +31,12 @@ def update_robot(data):
 async def main():
     while True:
         try:
+            print('connecting to %s server...' % (url))
             async with websockets.connect(url) as websocket:
                 while True:
+                    # wait for message from vr controller
                     server_message = await websocket.recv()
 
-                    # wait for message from vr controller
                     try:
                         server_message_obj = json.loads(server_message)
 
@@ -95,7 +96,7 @@ async def main():
                     #     print("Escape hit, closing...")
                     #     break
         except:
-            print('reconnecting to socket server...')
+            print('reconnecting to %s server...' % (url))
             time.sleep(3)
 
     cam.release()
