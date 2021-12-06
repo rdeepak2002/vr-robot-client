@@ -19,6 +19,14 @@ if len(sys.argv) != 2:
 url = sys.argv[1]
 
 
+# called in loop in main method
+def update_robot(data):
+    # TODO: control robot here (get message data from data_dict)
+    print("robot received data:")
+    print(data)
+
+
+# main method
 async def main():
     try:
         async with websockets.connect(url) as websocket:
@@ -33,7 +41,11 @@ async def main():
                     data = server_message_obj['data']
 
                     if sender == 'vr-controller':
-                        print(data)
+                        try:
+                            data_dict = json.loads(data_dict)
+                            update_robot(data_dict)
+                        except:
+                            print("error parsing data from message", data)
                 except:
                     print("error parsing", server_message)
 
