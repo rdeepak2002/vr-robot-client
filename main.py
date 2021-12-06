@@ -3,12 +3,20 @@ import websockets  # pip3 install websockets
 import base64
 import asyncio
 import json
+import sys
 
 # get the camera
 cam = cv2.VideoCapture(0)
 
+# AWS:   ws://18.232.126.27:5000/
+# Local: ws://2f6f-68-234-129-29.ngrok.io
+
 # get the url of the socket server
-url = 'ws://2f6f-68-234-129-29.ngrok.io'
+if len(sys.argv) != 2:
+    print('API_URL argument required')
+    exit(1)
+
+url = sys.argv[1]
 
 
 async def main():
