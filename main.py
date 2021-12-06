@@ -15,6 +15,20 @@ async def main():
     try:
         async with websockets.connect(url) as websocket:
             while True:
+                # wait for message from vr controller
+                server_message = await websocket.recv()
+
+                try:
+                    server_message_obj = json.loads(server_message)
+
+                    sender = server_message_obj['sender']
+                    data = server_message_obj['data']
+
+                    if sender == 'vr-controller':
+                        print(data)
+                except:
+                    print("error parsing", server_message)
+
                 # get webcam frame
                 ret, frame = cam.read()
 
