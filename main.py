@@ -31,8 +31,9 @@ def update_robot(data):
 async def main():
     while True:
         try:
-            print('connecting to %s server...' % (url))
             async with websockets.connect(url) as websocket:
+                print('connected to %s server...' % (url))
+
                 while True:
                     # wait for message from vr controller
                     server_message = await websocket.recv()
