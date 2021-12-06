@@ -21,7 +21,7 @@ url = sys.argv[1]
 
 # called in loop in main method
 def update_robot(data):
-    # TODO: control robot here (get message data from data_dict)
+    # TODO: control robot here (get message data from data dictionary)
     print("robot received data:")
     print(data)
 
