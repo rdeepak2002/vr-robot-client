@@ -32,22 +32,22 @@ async def main():
         async with websockets.connect(url) as websocket:
             while True:
                 # wait for message from vr controller
-                server_message = await websocket.recv()
-
-                try:
-                    server_message_obj = json.loads(server_message)
-
-                    sender = server_message_obj['sender']
-                    data = server_message_obj['data']
-
-                    if sender == 'vr-controller':
-                        try:
-                            data_dict = json.loads(data)
-                            update_robot(data_dict)
-                        except:
-                            print("error parsing data from message", data)
-                except:
-                    print("error parsing", server_message)
+                # server_message = await websocket.recv()
+                #
+                # try:
+                #     server_message_obj = json.loads(server_message)
+                #
+                #     sender = server_message_obj['sender']
+                #     data = server_message_obj['data']
+                #
+                #     if sender == 'vr-controller':
+                #         try:
+                #             data_dict = json.loads(data)
+                #             update_robot(data_dict)
+                #         except:
+                #             print("error parsing data from message", data)
+                # except:
+                #     print("error parsing", server_message)
 
                 # get webcam frame
                 ret, frame = cam.read()
@@ -80,6 +80,8 @@ async def main():
                 }
 
                 data_str = str(json.dumps(data))
+
+                # print(data_str)
 
                 await websocket.send(data_str)
 
