@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import os
 
 # AWS:   ws://18.232.126.27:5000/
 # Local: ws://2f6f-68-234-129-29.ngrok.io
@@ -11,4 +12,7 @@ if len(sys.argv) != 2:
 
 url = sys.argv[1]
 
-subprocess.run("(python3 robot-controller.py " + str(url) + ") & (python3 camera.py " + str(url) + ")", shell=True)
+script1_path = os.path.join(os.getcwd(), "robot-controller.py")
+script2_path = os.path.join(os.getcwd(), "camera.py")
+
+subprocess.run("(python3 " + script1_path + " " + str(url) + ") & (python3 " + script2_path + " " + str(url) + ")", shell=True)
