@@ -2,7 +2,8 @@ import subprocess
 import sys
 import os
 
-# AWS:   ws://18.232.126.27:5000/
+# Wavelength: ws://155.146.4.228:5000
+# AWS:   ws://18.232.126.27:5000
 # Local: ws://2f6f-68-234-129-29.ngrok.io
 
 # get the url of the socket server
