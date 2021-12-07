@@ -19,14 +19,33 @@ if len(sys.argv) != 2:
 
 url = sys.argv[1]
 
+
+# rate limit how frequently frames are sent
+def current_milli_time():
+    return round(time.time() * 1000)
+
+
+MAX_FPS = 30
+MAX_TIME_PER_FRAME = round(1000 / MAX_FPS)
+
+
 # main method
 async def main():
+    last_frame_sent_time = current_milli_time()
+
     while True:
         try:
             async with websockets.connect(url) as websocket:
                 print('connected to %s server...' % (url))
 
                 while True:
+                    if current_milli_time() - last_frame_sent_time < MAX_TIME_PER_FRAME:
+                        continue
+
+                    # print('sending frame')
+
+                    last_frame_sent_time = current_milli_time()
+
                     # get webcam frame
                     ret, frame = cam.read()
 
@@ -68,5 +87,6 @@ async def main():
 
     cam.release()
     cv2.destroyAllWindows()
+
 
 asyncio.get_event_loop().run_until_complete(main())
