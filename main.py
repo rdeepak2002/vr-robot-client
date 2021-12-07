@@ -23,8 +23,18 @@ url = sys.argv[1]
 # called in loop in main method
 def update_robot(data):
     # TODO: control robot here (get message data from data dictionary)
-    print("robot received data:")
-    print(data)
+    try:
+        # print("robot received data:")
+        print(data)
+
+        data_type = data['type']    # ex: 'button' if this data is from a button object being interacted with
+        data_data = data['data']    # ex: 'down' for when button is pressed down
+        data_name = data['name']    # ex: 'button_a'
+
+        if data_type == 'button':
+            print(data)
+    except:
+        print("error updating robot")
 
 
 # main method
