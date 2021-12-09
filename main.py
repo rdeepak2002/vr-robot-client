@@ -4,6 +4,7 @@ import os
 
 # Wavelength: ws://155.146.4.228:5000
 # AWS:   ws://18.232.126.27:5000
+# Heroku: https://vr-robot.herokuapp.com/
 # Local: ws://2f6f-68-234-129-29.ngrok.io
 
 # get the url of the socket server

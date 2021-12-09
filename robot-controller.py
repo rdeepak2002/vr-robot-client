@@ -5,9 +5,6 @@ import json
 import sys
 import time
 
-# AWS:   ws://18.232.126.27:5000/
-# Local: ws://2f6f-68-234-129-29.ngrok.io
-
 # get the url of the socket server
 if len(sys.argv) != 2:
     print('API_URL argument required')
@@ -40,11 +37,11 @@ def update_robot(data):
 
 
 # main method
-async def main():
+async def main_robot():
     while True:
         try:
             async with websockets.connect(url) as websocket:
-                print('connected to %s server...' % (url))
+                print('robot connected to %s server...' % (url))
 
                 while True:
                     # wait for message from vr controller
@@ -71,4 +68,4 @@ async def main():
     cam.release()
     cv2.destroyAllWindows()
 
-asyncio.get_event_loop().run_until_complete(main())
+asyncio.get_event_loop().run_until_complete(main_robot())

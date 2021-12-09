@@ -9,9 +9,6 @@ import time
 # get the camera
 cam = cv2.VideoCapture(0)
 
-# AWS:   ws://18.232.126.27:5000/
-# Local: ws://2f6f-68-234-129-29.ngrok.io
-
 # get the url of the socket server
 if len(sys.argv) != 2:
     print('API_URL argument required')
@@ -30,13 +27,13 @@ MAX_TIME_PER_FRAME = round(1000 / MAX_FPS)
 
 
 # main method
-async def main():
+async def main_camera():
     last_frame_sent_time = current_milli_time()
 
     while True:
         try:
             async with websockets.connect(url) as websocket:
-                print('connected to %s server...' % (url))
+                print('camera connected to %s server...' % (url))
 
                 while True:
                     if current_milli_time() - last_frame_sent_time < MAX_TIME_PER_FRAME:
@@ -89,4 +86,4 @@ async def main():
     cv2.destroyAllWindows()
 
 
-asyncio.get_event_loop().run_until_complete(main())
+asyncio.get_event_loop().run_until_complete(main_camera())
